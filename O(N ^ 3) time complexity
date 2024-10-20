@@ -1,0 +1,31 @@
+class Solution {
+    public int[] nextGreaterElements(int[] arr) {
+   int n = arr.length;
+        int[] ans = new int[n];
+        Arrays.fill(ans, -1); // Initialize the answer array with -1 (in case no greater element is found)
+
+        for (int i = 0; i < n; i++) {
+            int currEle = arr[i];
+            
+            // First, search for the next greater element in the remaining part of the array
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] > currEle) {
+                    ans[i] = arr[j]; // Found the next greater element
+                    break; // Stop the loop since we found the answer for arr[i]
+                }
+            }
+            
+            // If no greater element was found in the remaining part, search from the start of the array
+            if (ans[i] == -1) {  // Continue searching only if not found yet
+                for (int j = 0; j < i; j++) {
+                    if (arr[j] > currEle) {
+                        ans[i] = arr[j]; // Found the next greater element
+                        break; // Stop the loop once found
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
+}
